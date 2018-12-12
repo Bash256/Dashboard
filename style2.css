@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Changa+One|Open+Sans:400,400italic,700,700italic,400,700,800');
+
+header {
+    float: left;
+    margin: 0 0 20px 0;
+    padding: 5px 0 0;
+    width: 100%;
+    background: #607D8B;
+}
+
+#quote {
+    line-height: 22px;;
+}
+
+.body2 {
+    font-family: 'Open Sans', sans-serif;
+    color: #999;
+    background-color: #78909C;
+}
+
+.wrapper {
+    max-width: 940px;
+    margin: 110px auto;
+    padding: 0 5%;
+}
+
+.jumbotron {
+    background-color: #CFD8DC;
+    border: 5px solid #263238;
+    text-align: center;
+    width: 500px;
+    align-content: center;
+}
+
+h1, h2, p {
+    color: #fff;
+}
+
+h3, h4 {
+    color: black;
+}
+
+h1 {
+    font-family: 'Changa One', sans-serif;
+    margin: 15px 0;
+    font-size: 1.75em;
+    font-weight: normal;
+    line-height: 0.8em;
+}
+
+h2 {
+    font-weight: normal;
+    font-size: 0.75em;
+    margin: -5px 0 0;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: normal;
+    line-height: 0.8em;
+}
+
+footer {
+    font-size: 0.75em;
+    padding-top: 25px;
+    color: #ccc;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+}
+
+a:hover, a:visited {
+    color: black;
+}
+
+.primary {
+    float: left;
+    width: 50%;
+    margin: 2px 0;
+}
+
+.secondary {
+    margin: 2px 0;
+    width: 40%;
+    float: right;
+}
+
+.quote-color {
+    color: #263238;
+}

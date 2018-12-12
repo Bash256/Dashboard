@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.deep_orange-amber.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Links a bootstrap stylesheet -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="mdl-grid" ng-app="dashboard">
+
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet">
+
+      <div class="mdl-card mdl-shadow--4dp card-dt bg-color-{{bgClr[0]}}" ng-controller="dateCard">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">All in good Time</h2>
+        </div>
+        <div class="mdl-card__media">
+          <div class="line-breaker"></div>
+          <div class="date-time">
+            {{ ld }}
+            <br /> {{ lt }}
+          </div>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div class="mdl-card mdl-shadow--4dp card-loc bg-color-{{bgClr[4]}}" ng-controller="locCard">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">It's your spot</h2>
+          <span class="add-ico"> <i class="material-icons" ng-click="getLoc()">my_location</i> </span>
+        </div>
+        <div class="mdl-card__media">
+          <div class="line-breaker"></div>
+          <div class="mdl-spinner mdl-js-spinner is-active" ng-show="!myLoc"></div>
+          <div ng-show="myLoc">
+            {{ myLoc.query }} <br /> {{ myLoc.city }}, {{ myLoc.regionName }} <br />
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
+      <div class="mdl-card mdl-shadow--4dp card-todo bg-color-{{bgClr[1]}}" ng-controller="toDoCard">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text" id="font-error">Get Stuff Done!</h2>
+          <span class="add-ico">
+            <i class="material-icons ico-anim-{{addMode}}" ng-click="toggleForm()">add_circle</i>
+            <i class="material-icons" ng-click="clearDoneItems()">delete</i>
+          </span>
+        </div>
+        <div class="mdl-card__media" id="list-view" ng-hide="addMode">
+          <div class="line-breaker"></div>
+          <ul>
+            <li class="td-li item-done-{{item.done}}" ng-model="toDoList" ng-repeat="item in toDoList track by $index">
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-{{$index}}">
+                <input type="checkbox" id="checkbox-{{$index}}" class="mdl-checkbox__input" ng-model="item.done">
+                <span class="mdl-checkbox__label">{{item.desc}}</span>
+              </label>
+              <div class="item-due-date" ng-show="item.due">Due: {{item.due | date}} </div>
+              <div class="item-due-date" ng-show="item.dt">Added: {{item.dt | date:'MMM dd, yyyy' }} </div>
+              <div class="line-breaker tdl"></div>
+            </li>
+            <ul>
+        </div>
+        <div class="mdl-card__media" id="add-view" ng-show="addMode">
+          <div class="line-breaker"></div>
+          <form name="addNewForm">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" name="itemDesc" type="text" id="td-desc" ng-model="newItem.desc"
+                required>
+              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="td-desc">Description...</label>
+            </div>
+
+            <br />
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="date" id="td-due" ng-model="newItem.due">
+              <label class="mdl-textfield__label" style="color: rgba(0,0,0,0.0);" for="td-due">Due Date...</label>
+            </div>
+            <br />
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+              ng-click="addItem()" ng-disabled='!addNewForm.itemDesc.$valid'>ADD</button>
+          </form>
+        </div>
+        <div class="mdl-card__supporting-text">
+        </div>
+        <div class="mdl-card__actions">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
+
+      <div class="mdl-card mdl-shadow--4dp card-weather bg-color-{{bgClr[2]}}" ng-controller="myWeather">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">Going out?</h2>
+          <span class="add-ico"> <i class="material-icons" ng-click="getWeather()">wb_sunny</i> </span>
+        </div>
+        <div class="mdl-card__media">
+          <div class="line-breaker"></div>
+          <div class="mdl-spinner mdl-js-spinner is-active" ng-show="!wForecast"></div>
+          <div ng-show="wForecast">
+            <span> {{ wForecast.abs.description }} </span> <br /> Humidity : {{ wForecast.humidity }} <br /> Temp : {{
+            wForecast.temp + 'C' }} <br />
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
+
+      <div class="mdl-card mdl-shadow--4dp card-profile bg-color-{{bgClr[3]}}" ng-controller="userProfile">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">Today's all about you!</h2>
+          <span class="add-ico" ng-if="profile.fid == 4"> <i class="material-icons" ng-click="editProfile()">insert_emoticon</i></span>
+        </div>
+        <div class="mdl-card__media">
+          <div class="line-breaker"></div>
+          <div ng-show="editMode">
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-if="profile.fid == 1">
+              <input class="mdl-textfield__input" type="text" id="user-q1" ng-model="profile.name" maxlength="10">
+              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q1">I am ...</label>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-if="profile.fid == 2">
+              <input class="mdl-textfield__input" type="text" id="user-q2" ng-model="profile.smile">
+              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q2">What made you smile
+                today {{profile.name}}?</label>
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-if="profile.fid == 3">
+              <input class="mdl-textfield__input" type="text" id="user-q3" ng-model="profile.rem">
+              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q3">{{profile.name}}, did
+                you forget something?</label>
+            </div>
+
+            <div class="lead-msg" ng-if="profile.fid == 4">You are awesome {{profile.name}} and you're gonna have a
+              Great Day.
+              <br />
+              <i class="material-icons">thumb_up</i></div>
+
+            <br />
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="goToNext()" ng-if="profile.fid < 4">
+              Next
+            </button>
+
+          </div>
+          <div ng-hide="editMode">
+            <div class="lead-msg"> Here's what you told me: {{ profile.name + ' - ' + profile.smile + ' - ' +
+              profile.rem }}
+            </div>
+            <br />
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="resetProfile()">
+              Reset
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-tablet">
+
+      <div class="mdl-card mdl-shadow--4dp card-color bg-color-{{bgClr[5]}}" ng-controller="colorMe">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">Try Me!</h2>
+        </div>
+        <div class="mdl-card__media">
+          <div class="line-breaker"></div>
+          <span class="main-ico"> <i class="material-icons" ng-click="shuffleClr()">blur_circular</i></span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div id="toast_box" class="mdl-js-snackbar mdl-snackbar mdl-snackbar--active" ng-show="toast.show">
+      <div class="mdl-snackbar__text">{{ toast.msg }}</div>
+      <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
+  </div>
+
+
+
+  <section class="body2" ng-app="randomQuoteGenerator" ng-controller="mainCtrl" ng-style="{'background-color': color}">
+
+    <div class="jumbotron">
+      <section class="quote-color">
+        <h3 id="quote">{{ initialQuote }} </h3>
+        <h3> @<span id="author">{{ initialQuoteAuthor }}</span></h3>
+      </section>
+      <section>
+        <div class="row">
+          <div class="col-xs-6 primary">
+            <a class="btn btn-primary" id="twitter" target="_blank" ng-href="{{link}}">Tweet</a>
+          </div>
+          <div class="col-xs-6 secondary">
+            <button class="btn btn-primary" id="newquote" ng-click="getRandomQuote()">New Quote</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet">
+      <footer class="footer">
+        Angular Project by Bashar Alkafri
+      </footer>
+    </div>
+  </div>
+
+  <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+  <script src="angular.js"></script>
+</body>
+
+</html>
