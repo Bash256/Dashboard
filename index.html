@@ -24,7 +24,7 @@
 
       <div class="mdl-card mdl-shadow--4dp card-dt bg-color-{{bgClr[0]}}" ng-controller="dateCard">
         <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">All in good Time</h2>
+          <h2 class="mdl-card__title-text">Tic, Toc, I'm a clock</h2>
         </div>
         <div class="mdl-card__media">
           <div class="line-breaker"></div>
@@ -39,14 +39,14 @@
 
       <div class="mdl-card mdl-shadow--4dp card-loc bg-color-{{bgClr[4]}}" ng-controller="locCard">
         <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">It's your spot</h2>
+          <h2 class="mdl-card__title-text">Your IP adress location</h2>
           <span class="add-ico"> <i class="material-icons" ng-click="getLoc()">my_location</i> </span>
         </div>
         <div class="mdl-card__media">
           <div class="line-breaker"></div>
           <div class="mdl-spinner mdl-js-spinner is-active" ng-show="!myLoc"></div>
           <div ng-show="myLoc">
-            {{ myLoc.query }} <br /> {{ myLoc.city }}, {{ myLoc.regionName }} <br />
+            {{ myLoc.query }} <br />{{ myLoc.city }}, {{ myLoc.country }}. <br /> Coordinates: Longitude; {{ myLoc.lon }} Lattitude; {{ myLoc.lat }} 
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@
     <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
       <div class="mdl-card mdl-shadow--4dp card-todo bg-color-{{bgClr[1]}}" ng-controller="toDoCard">
         <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text" id="font-error">Get Stuff Done!</h2>
+          <h2 class="mdl-card__title-text" id="font-error">I have to:</h2>
           <span class="add-ico">
             <i class="material-icons ico-anim-{{addMode}}" ng-click="toggleForm()">add_circle</i>
             <i class="material-icons" ng-click="clearDoneItems()">delete</i>
@@ -107,7 +107,7 @@
 
       <div class="mdl-card mdl-shadow--4dp card-weather bg-color-{{bgClr[2]}}" ng-controller="myWeather">
         <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Going out?</h2>
+          <h2 class="mdl-card__title-text">Heading out?</h2>
           <span class="add-ico"> <i class="material-icons" ng-click="getWeather()">wb_sunny</i> </span>
         </div>
         <div class="mdl-card__media">
@@ -127,8 +127,8 @@
 
       <div class="mdl-card mdl-shadow--4dp card-profile bg-color-{{bgClr[3]}}" ng-controller="userProfile">
         <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text">Today's all about you!</h2>
-          <span class="add-ico" ng-if="profile.fid == 4"> <i class="material-icons" ng-click="editProfile()">insert_emoticon</i></span>
+          <h2 class="mdl-card__title-text">Remind Me!</h2>
+          <span class="add-ico" ng-if="profile.fid == 5"> <i class="material-icons" ng-click="editProfile()">insert_emoticon</i></span>
         </div>
         <div class="mdl-card__media">
           <div class="line-breaker"></div>
@@ -136,35 +136,38 @@
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-if="profile.fid == 1">
               <input class="mdl-textfield__input" type="text" id="user-q1" ng-model="profile.name" maxlength="10">
-              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q1">I am ...</label>
+              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q1">Hi! I'm ReMe, what's your name?</label>
             </div>
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-if="profile.fid == 2">
               <input class="mdl-textfield__input" type="text" id="user-q2" ng-model="profile.smile">
-              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q2">What made you smile
-                today {{profile.name}}?</label>
+              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q2">Got any meetings today {{profile.name}}?</label>
             </div>
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-if="profile.fid == 3">
               <input class="mdl-textfield__input" type="text" id="user-q3" ng-model="profile.rem">
-              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q3">{{profile.name}}, did
-                you forget something?</label>
+              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q3">{{profile.name}}, need me to remind you of anything? </label>
             </div>
 
-            <div class="lead-msg" ng-if="profile.fid == 4">You are awesome {{profile.name}} and you're gonna have a
-              Great Day.
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" ng-if="profile.fid == 4">
+              <input class="mdl-textfield__input" type="text" id="user-q4" ng-model="profile.etc">
+              <label class="mdl-textfield__label" style="color:rgb(55, 33, 10);" for="user-q4">Anything else {{profile.name}}?</label>
+            </div>
+
+            <div class="lead-msg" ng-if="profile.fid == 5">You are awesome {{profile.name}} and you're gonna have a
+              Great Day. Click the smiling emoji to view your answers!
               <br />
               <i class="material-icons">thumb_up</i></div>
 
             <br />
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="goToNext()" ng-if="profile.fid < 4">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="goToNext()" ng-if="profile.fid < 5">
               Next
             </button>
 
           </div>
           <div ng-hide="editMode">
             <div class="lead-msg"> Here's what you told me: {{ profile.name + ' - ' + profile.smile + ' - ' +
-              profile.rem }}
+              profile.rem + ' - ' + profile.etc }}
             </div>
             <br />
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" ng-click="resetProfile()">
