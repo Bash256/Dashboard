@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Productivity</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.deep_orange-amber.min.css">
@@ -18,6 +18,22 @@
 </head>
 
 <body ng-app="dashboard">
+  <div class="mdl-grid">
+
+    <div class="titleBox">
+
+      <div class="mdl-card mdl-shadow--4dp card-dt bg-color-{{bgClr[6]}}">
+        <div class="mdl-card__title">
+          <h2 class="mdl-card__title-text">PRODUCTIVITY APP</h2>
+        </div>
+        <div class="mdl-card__media">
+          <div class="line-breaker"></div>
+          <div>
+            Hello, this is our Productivity app by Productive Technologies INC. Feel free to utalize our app's different features to help you prepare & organize your day!
+          </div>
+        </div>
+      </div>
+
   <div class="mdl-grid">
 
     <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet">
@@ -37,7 +53,7 @@
 
       <div class="spacer"></div>
 
-      <div class="mdl-card mdl-shadow--4dp card-loc bg-color-{{bgClr[4]}}" ng-controller="locCard">
+      <div class="mdl-card mdl-shadow--4dp card-loc bg-color-{{bgClr[1]}}" ng-controller="locCard">
         <div class="mdl-card__title">
           <h2 class="mdl-card__title-text">Your IP adress location</h2>
           <span class="add-ico"> <i class="material-icons" ng-click="getLoc()">my_location</i> </span>
@@ -54,7 +70,7 @@
     </div>
 
     <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
-      <div class="mdl-card mdl-shadow--4dp card-todo bg-color-{{bgClr[1]}}" ng-controller="toDoCard">
+      <div class="mdl-card mdl-shadow--4dp card-todo bg-color-{{bgClr[2]}}" ng-controller="toDoCard">
         <div class="mdl-card__title">
           <h2 class="mdl-card__title-text" id="font-error">I have to:</h2>
           <span class="add-ico">
@@ -105,7 +121,7 @@
 
     <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
 
-      <div class="mdl-card mdl-shadow--4dp card-weather bg-color-{{bgClr[2]}}" ng-controller="myWeather">
+      <div class="mdl-card mdl-shadow--4dp card-weather bg-color-{{bgClr[3]}}" ng-controller="myWeather">
         <div class="mdl-card__title">
           <h2 class="mdl-card__title-text">Heading out?</h2>
           <span class="add-ico"> <i class="material-icons" ng-click="getWeather()">wb_sunny</i> </span>
@@ -125,7 +141,7 @@
 
     <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
 
-      <div class="mdl-card mdl-shadow--4dp card-profile bg-color-{{bgClr[3]}}" ng-controller="userProfile">
+      <div class="mdl-card mdl-shadow--4dp card-profile bg-color-{{bgClr[4]}}" ng-controller="userProfile">
         <div class="mdl-card__title">
           <h2 class="mdl-card__title-text">Remind Me!</h2>
           <span class="add-ico" ng-if="profile.fid == 5"> <i class="material-icons" ng-click="editProfile()">insert_emoticon</i></span>

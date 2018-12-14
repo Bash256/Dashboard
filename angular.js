@@ -243,7 +243,7 @@ app.run(function($rootScope) {
   */
   
   // globals
-  $rootScope.bgClr = ['x0','x1','x2','x3','x4','x5'];
+  $rootScope.bgClr = ['x0','x1','x2','x3','x4','x5','x6'];
   
 });
 
